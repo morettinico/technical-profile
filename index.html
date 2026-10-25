@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#252943">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext x='50%25' y='51%25' dominant-baseline='middle' text-anchor='middle' fill='%23e3ff3b' font-family='Arial,sans-serif' font-size='38' font-weight='700'%3ENM%3C/text%3E%3C/svg%3E">
+  <title>Nicolò Moretti — Profilo tecnico</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --blue: #3a4efb;
+      --sky: #33a4fa;
+      --lime: #e3ff3b;
+      --dark: #252943;
+      --light: #dee0ed;
+      font-family: Arial, Helvetica, sans-serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    html, body { scrollbar-width: none; }
+    html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
+
+    body {
+      margin: 0;
+      background: var(--dark);
+      color: var(--light);
+      line-height: 1.65;
+    }
+
+    .topbar {
+      display: flex;
+      height: 66px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 max(24px, calc((100vw - 1050px) / 2));
+      border-bottom: 1px solid rgb(222 224 237 / 18%);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--light);
+      font-size: .9rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .brand-mark { color: var(--lime); }
+    .topbar-note { color: var(--light); font-size: .8rem; }
+
+    main {
+      display: grid;
+      width: min(100% - 48px, 1050px);
+      min-height: calc(100vh - 66px);
+      grid-template-columns: 192px minmax(0, 1fr);
+      gap: clamp(36px, 7vw, 92px);
+      align-content: center;
+      margin: 0 auto;
+      padding: 68px 0;
+    }
+
+    .side {
+      align-self: start;
+      padding-top: 8px;
+    }
+
+    .eyebrow {
+      margin: 0 0 23px;
+      color: var(--light);
+      font-size: .69rem;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .selector {
+      display: grid;
+      gap: 38px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .selector button {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      gap: 13px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--light);
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
+    }
+
+    .selector-circle {
+      display: grid;
+      width: 50px;
+      height: 50px;
+      flex: 0 0 50px;
+      place-items: center;
+      border: 1px solid rgb(222 224 237 / 45%);
+      border-radius: 50%;
+      color: var(--light);
+      font-size: .79rem;
+      font-weight: 700;
+      transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .18s ease;
+    }
+
+    .selector:not(.is-used) button .selector-circle {
+      animation: invite-click 1.8s ease-in-out infinite;
+    }
+
+    .selector:not(.is-used) button:nth-child(2) .selector-circle { animation-delay: .6s; }
+    .selector:not(.is-used) button:nth-child(3) .selector-circle { animation-delay: 1.2s; }
+
+    @keyframes invite-click {
+      0%, 100% { translate: 0; }
+      15%, 55% { translate: 0; }
+      35% { translate: 4px; }
+    }
+
+    .selector button:hover .selector-circle {
+      border-color: var(--sky);
+      transform: scale(1.06);
+    }
+
+    .selector button[aria-selected="true"] .selector-circle {
+      border-color: var(--lime);
+      background: var(--lime);
+      color: var(--dark);
+    }
+
+    .selector-label { font-size: .82rem; line-height: 1.35; }
+
+    .selector button[aria-selected="true"] .selector-label { color: var(--lime); }
+
+    .content {
+      min-width: 0;
+      align-self: center;
+    }
+
+    .content-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+      color: var(--lime);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .content-header::before {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--lime);
+      content: "";
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      color: var(--light);
+      font-size: clamp(1.9rem, 4.6vw, 3.2rem);
+      letter-spacing: -.055em;
+      line-height: 1.1;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 22px;
+      margin-bottom: 24px;
+      color: var(--light);
+      font-size: .83rem;
+    }
+
+    .meta strong { color: var(--light); }
+
+    .panel {
+      animation: appear .22s ease both;
+    }
+
+    .panel[hidden] { display: none; }
+
+    .panel p {
+      margin: 0 0 14px;
+      color: var(--light);
+      font-size: .96rem;
+    }
+
+    .panel h2 {
+      margin: 27px 0 12px;
+      color: var(--light);
+      font-size: .9rem;
+      letter-spacing: .02em;
+    }
+
+    .process {
+      margin: 0;
+      padding-left: 22px;
+      color: var(--light);
+      font-size: .9rem;
+    }
+
+    .process li { padding: 3px 0 3px 5px; }
+    .process li::marker { color: var(--lime); font-weight: 700; }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .chips li {
+      display: inline-flex;
+      min-height: 31px;
+      align-items: center;
+      gap: 7px;
+      padding: 3px 10px 3px 5px;
+      border: 1px solid rgb(222 224 237 / 34%);
+      color: var(--light);
+      font-size: .77rem;
+    }
+
+    .chip-icon {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      color: var(--lime);
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.7;
+    }
+
+    .icon-library { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 680px) {
+      .topbar { height: 58px; padding: 0 max(32px, calc((100vw - 560px) / 2)); }
+      .topbar-note { font-size: .7rem; }
+      main {
+        width: min(100% - 64px, 560px);
+        min-height: calc(100vh - 58px);
+        grid-template-columns: 1fr;
+        gap: 32px;
+        align-content: start;
+        padding: 34px 0 48px;
+      }
+      .eyebrow { margin-bottom: 12px; }
+      .selector { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+      .selector button { flex-direction: column; align-items: flex-start; gap: 7px; }
+      .selector-circle { width: 44px; height: 44px; flex-basis: 44px; }
+      .selector-label { max-width: 110px; font-size: .72rem; }
+      .content { align-self: start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <svg class="icon-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="icon-workflow" viewBox="0 0 24 24">
+      <rect x="3" y="4" width="6" height="6" rx="1"/><rect x="15" y="14" width="6" height="6" rx="1"/>
+      <path d="M9 7h4a3 3 0 0 1 3 3v4"/>
+    </symbol>
+    <symbol id="icon-terminal" viewBox="0 0 24 24">
+      <path d="m5 6 6 6-6 6M13 18h6"/>
+    </symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+    </symbol>
+    <symbol id="icon-database" viewBox="0 0 24 24">
+      <ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>
+    </symbol>
+    <symbol id="icon-layers" viewBox="0 0 24 24">
+      <path d="m12 3 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 16l9 5 9-5"/>
+    </symbol>
+    <symbol id="icon-chart" viewBox="0 0 24 24">
+      <path d="M4 20V11h4v9M10 20V5h4v15M16 20v-7h4v7M3 20h18"/>
+    </symbol>
+    <symbol id="icon-spark" viewBox="0 0 24 24">
+      <path d="m13 2-3 9h7l-6 11 2-9H6l7-11Z"/>
+    </symbol>
+    <symbol id="icon-globe" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>
+    </symbol>
+    <symbol id="icon-document" viewBox="0 0 24 24">
+      <path d="M6 3h8l5 5v13H6zM14 3v5h5M9 13h7M9 17h7"/>
+    </symbol>
+    <symbol id="icon-trend" viewBox="0 0 24 24">
+      <path d="m4 17 6-6 4 4 6-8M14 7h6v6"/>
+    </symbol>
+  </svg>
+  <nav class="topbar" aria-label="Navigazione principale">
+    <a class="brand" href="#inizio"><span class="brand-mark">NM</span> Nicolò Moretti</a>
+  </nav>
+
+  <main id="inizio">
+    <aside class="side">
+      <div class="selector" role="tablist" aria-label="Seleziona una sezione" aria-orientation="vertical">
+        <button id="tab-retail" type="button" role="tab" aria-selected="true" aria-controls="panel-retail" tabindex="0">
+          <span class="selector-circle">01</span><span class="selector-label">Retail · Data Engineering</span>
+        </button>
+        <button id="tab-salute" type="button" role="tab" aria-selected="false" aria-controls="panel-salute" tabindex="-1">
+          <span class="selector-circle">02</span><span class="selector-label">Salute · Modelli predittivi</span>
+        </button>
+        <button id="tab-tesi" type="button" role="tab" aria-selected="false" aria-controls="panel-tesi" tabindex="-1">
+          <span class="selector-circle">03</span><span class="selector-label">Ricerca · Macroeconomia</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="content">
+      <section class="panel" id="panel-retail" role="tabpanel" aria-labelledby="tab-retail">
+        <div class="content-header">Esperienza professionale · Retail</div>
+        <h1>Pipeline ETL end-to-end e dashboard executive</h1>
+        <div class="meta">
+          <span><strong>Ruolo:</strong> Data Engineer &amp; BI Developer</span>
+          <span><strong>Ambito:</strong> Hackathon aziendale Retail BI</span>
+        </div>
+        <p>Durante il tirocinio ho preso parte a un hackathon interno finalizzato alla progettazione e allo sviluppo di una soluzione integrata di Business Intelligence e Data Engineering per un’importante azienda attiva nel settore Retail.</p>
+        <p>Nel ruolo di Data Engineer &amp; BI Developer, ho curato l'implementazione dell'intera pipeline end-to-end: dall’ingestion alla pulizia e normalizzazione dei dati (transazioni di cassa, recensioni in formato JSON e file di target/budget) fino alla reportistica finale.</p>
+        <h2>Il processo</h2>
+        <ol class="process">
+          <li>Estrazione e trasformazione dati con KNIME.</li>
+          <li>Schedulazione pipeline con processi DOS (.bat) e NodePit Batch Executor.</li>
+          <li>Ingestion in Databricks tramite Databricks Volumes.</li>
+          <li>Architettura Medallion: ingestion in Bronze, pulizia e parsing JSON in Silver, dato finale per la reportistica in Gold.</li>
+          <li>Dashboard Power BI per monitorare i principali KPI e il loro scostamento dai target.</li>
+        </ol>
+        <h2>Tecnologie &amp; strumenti</h2>
+        <ul class="chips" aria-label="Tecnologie e strumenti utilizzati">
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-workflow"/></svg>KNIME</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-terminal"/></svg>Batch scripting</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-clock"/></svg>NodePit</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-database"/></svg>Databricks</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-spark"/></svg>Spark SQL</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-layers"/></svg>Delta Lake</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-chart"/></svg>Power BI · DAX</li>
+        </ul>
+      </section>
+
+      <section class="panel" id="panel-salute" role="tabpanel" aria-labelledby="tab-salute" hidden>
+        <div class="content-header">Progetto accademico · Statistica</div>
+        <h1>Modelli predittivi sanitari</h1>
+        <div class="meta">
+          <span><strong>Ruolo:</strong> Responsabile analisi dati e modellazione</span>
+          <span><strong>Ambito:</strong> Statistica applicata</span>
+        </div>
+        <p>Nell’ambito degli insegnamenti universitari di Statistica, ho sviluppato un progetto orientato all’analisi predittiva e all’inferenza statistica su dati clinico-epidemiologici estratti da un dataset ospedaliero statunitense.</p>
+        <p>L’attività è consistita nell’esplorazione preliminare dei dati, nella fase di pre-processing (pulizia, gestione dei valori mancanti e codifica delle variabili) e nell’implementazione di un modello lineare generalizzato (GLM), integrato con componenti di analisi temporale per monitorare l’evoluzione delle diagnosi.</p>
+        <p>L’obiettivo principale è stato quantificare l’incidenza di fattori di rischio specifici — tra cui abitudini legate a fumo e consumo di alcol, fasce d’età, sesso e comorbidità pregresse — sulla probabilità di insorgenza e ospedalizzazione per patologie oncologiche.</p>
+        <p>Nel ruolo di responsabile dell’analisi dati, ho curato l’intero ciclo analitico: dalla selezione delle feature alla stima dei coefficienti e dei relativi Odds Ratio, fino alla validazione del modello tramite diagnostica dei residui e curve ROC per valutarne accuratezza e potere predittivo.</p>
+        <p>Il lavoro è stato svolto interamente nell’ambiente di sviluppo RStudio, impiegando librerie statistiche specializzate per l’inferenza quantitativa.</p>
+        <h2>Tecnologie &amp; strumenti</h2>
+        <ul class="chips" aria-label="Tecnologie e strumenti utilizzati">
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-document"/></svg>RStudio</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-trend"/></svg>GLM</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-chart"/></svg>MASS</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-workflow"/></svg>car</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-chart"/></svg>stats</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-trend"/></svg>forecast</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-chart"/></svg>Curve ROC</li>
+        </ul>
+      </section>
+
+      <section class="panel" id="panel-tesi" role="tabpanel" aria-labelledby="tab-tesi" hidden>
+        <div class="content-header">Tesi triennale · Macroeconomia</div>
+        <h1>La trappola della liquidità</h1>
+        <div class="meta">
+          <span><strong>Ruolo:</strong> Ricercatore e autore</span>
+          <span><strong>Ambito:</strong> Politica monetaria</span>
+        </div>
+        <p>Indagine teorico-empirica sulla trappola della liquidità e sui limiti della politica monetaria convenzionale allo Zero Lower Bound (ZLB). La ricerca confronta tre snodi storici: la Grande Depressione statunitense del 1929, la stagnazione giapponese degli anni ’90 e la crisi finanziaria globale del 2008.</p>
+        <p>Ho curato la revisione della letteratura, definito il framework di confronto e analizzato gli strumenti non convenzionali adottati da Federal Reserve, BoJ e BCE: Quantitative Easing, Forward Guidance e tassi d’interesse negativi.</p>
+        <p>Per la parte empirica ho raccolto e analizzato serie storiche e indicatori macroeconomici — inflazione, tassi guida, crescita del PIL e bilanci delle banche centrali — consultando fonti istituzionali.</p>
+        <h2>Temi &amp; fonti</h2>
+        <ul class="chips" aria-label="Temi e fonti della ricerca">
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-chart"/></svg>FRED</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-document"/></svg>IMF</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-globe"/></svg>World Bank</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-trend"/></svg>Quantitative Easing</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-trend"/></svg>Forward Guidance</li>
+          <li><svg class="chip-icon" aria-hidden="true"><use href="#icon-chart"/></svg>NIRP</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const tabs = [...document.querySelectorAll('[role="tab"]')];
+    const panels = tabs.map((tab) => document.getElementById(tab.getAttribute("aria-controls")));
+    const selector = document.querySelector(".selector");
+
+    function selectTab(index, moveFocus = false) {
+      selector.classList.add("is-used");
+      tabs.forEach((tab, current) => {
+        const selected = current === index;
+        tab.setAttribute("aria-selected", String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        panels[current].hidden = !selected;
+      });
+      if (moveFocus) tabs[index].focus();
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => selectTab(index));
+      tab.addEventListener("keydown", (event) => {
+        const direction = event.key === "ArrowDown" || event.key === "ArrowRight" ? 1
+          : event.key === "ArrowUp" || event.key === "ArrowLeft" ? -1 : 0;
+        if (!direction) return;
+        event.preventDefault();
+        selectTab((index + direction + tabs.length) % tabs.length, true);
+      });
+    });
+  </script>
+</body>
+</html>
